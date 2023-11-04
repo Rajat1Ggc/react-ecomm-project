@@ -5,6 +5,8 @@ import Cart from './pages/cart/cart';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import NoPage from './pages/nopage/NoPage';
 import MyState from './context/data/myState';
+import Login from './pages/registration/Login';
+import Signup from './pages/registration/Signup';
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/dashboard" element={<Dashboard />} />
           {/* when path not match then this path run  */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </Router>
