@@ -1,7 +1,6 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './pages/home/Home';
-import Order from './pages/order/order';
+import Order from './pages/order/Orders';
 import Cart from './pages/cart/cart';
 import Dashboard from './pages/admin/dashboard/dashboard';
 import NoPage from './pages/nopage/NoPage';
