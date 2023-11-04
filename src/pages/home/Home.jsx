@@ -1,3 +1,4 @@
+import Filter from '../../components/filter/Filter';
 import HeroSection from '../../components/heroSection/HeroSection';
 import Layout from '../../components/layout/Layout';
 
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <Layout>
         <HeroSection />
+        <Filter />
       </Layout>
     </div>
   );
