@@ -6,8 +6,14 @@ const MyState = (props) => {
     name: 'rajat',
     rollNo: 33,
   };
+  const color = 'red';
+  // when we pass more then 1 variable then
+  // value = {state, color} gives error
+  // correct method  value = {{state, color}} make an object
   return (
-    <myContext.Provider value={state}>{props.children}</myContext.Provider>
+    <myContext.Provider value={{ state, color }}>
+      {props.children}
+    </myContext.Provider>
   );
 };
 
