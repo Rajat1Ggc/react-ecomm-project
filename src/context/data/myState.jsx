@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import myContext from './myContext';
 
 const MyState = (props) => {
@@ -12,8 +12,10 @@ const MyState = (props) => {
       document.body.style.backgroundColor = 'white';
     }
   };
+
+  const [loading, setLoading] = useState(false);
   return (
-    <myContext.Provider value={{ mode, toggleMode }}>
+    <myContext.Provider value={{ mode, toggleMode, loading, setLoading }}>
       {props.children}
     </myContext.Provider>
   );
