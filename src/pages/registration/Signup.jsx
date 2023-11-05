@@ -2,6 +2,8 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import myContext from '../../context/data/myContext';
 import { toast } from 'react-toastify';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase/FirebaseConfig';
 
 function Signup() {
   const [name, setName] = useState('');
@@ -11,10 +13,16 @@ function Signup() {
   // const context = useContext(myContext);
   // const [loading, setloading] = context;
 
-  const signUp = () => {
+  const signUp = async () => {
     console.log(name, email, password);
     if (name === '' || email === '' || password === '') {
       return toast.error('All fields must be fill ');
+    }
+    try {
+      const users = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(users);
+    } catch (error) {
+      console.log(error);
     }
   };
 
