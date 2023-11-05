@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import myContext from '../../context/data/myContext';
 import { toast } from 'react-toastify';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase/FirebaseConfig';
+import { auth, fireDB } from '../../firebase/FirebaseConfig';
+import { Timestamp, addDoc, collection } from 'firebase/firestore';
 
 function Signup() {
   const [name, setName] = useState('');
@@ -21,6 +22,20 @@ function Signup() {
     try {
       const users = await createUserWithEmailAndPassword(auth, email, password);
       console.log(users);
+      const user = {
+        name: name,
+        uid: users.user.uid,
+        email: users.user.email,
+        time: Timestamp.now(),
+      };
+      // for fireStored
+      const userRef = collection(fireDB, 'users');
+      await addDoc(userRef, user);
+      // for when after sign up clear input
+      setName('');
+      setPassword('');
+      setemail('');
+      toast.success('your sign up success fully completed!');
     } catch (error) {
       console.log(error);
     }
