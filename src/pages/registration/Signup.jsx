@@ -5,16 +5,18 @@ import { toast } from 'react-toastify';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, fireDB } from '../../firebase/FirebaseConfig';
 import { Timestamp, addDoc, collection } from 'firebase/firestore';
+import Loader from '../../components/loader/Loader';
 
 function Signup() {
   const [name, setName] = useState('');
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
 
-  // const context = useContext(myContext);
-  // const [loading, setloading] = context;
+  const loader = useContext(myContext);
+  const { loading, setLoading } = loader;
 
   const signUp = async () => {
+    setLoading(true);
     console.log(name, email, password);
     if (name === '' || email === '' || password === '') {
       return toast.error('All fields must be fill ');
@@ -31,18 +33,22 @@ function Signup() {
       // for fireStored
       const userRef = collection(fireDB, 'users');
       await addDoc(userRef, user);
+
+      toast.success('your sign up success fully completed!');
       // for when after sign up clear input
       setName('');
       setPassword('');
       setemail('');
-      toast.success('your sign up success fully completed!');
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
   return (
     <div className=" flex justify-center items-center h-screen">
+      {loading && <Loader />}
       <div className=" bg-gray-800 px-10 py-10 rounded-xl ">
         <div className="">
           <h1 className="text-center text-white text-xl mb-4 font-bold">
