@@ -12,6 +12,13 @@ export default function NavBar() {
   const context = useContext(myContext);
   const { toggleMode, mode } = context;
 
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user.user.email);
+
+  const logout = () => {
+    localStorage.clear('user');
+    window.location.href = './login';
+  };
   return (
     <div className="bg-white sticky top-0 z-50  ">
       {/* Mobile menu */}
@@ -64,34 +71,44 @@ export default function NavBar() {
                   >
                     All Products
                   </Link>
-                  <div className="flow-root">
-                    <Link
-                      to={'/order'}
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Order
-                    </Link>
-                  </div>
+                  {user ? (
+                    <div className="flow-root">
+                      <Link
+                        to={'/order'}
+                        style={{ color: mode === 'dark' ? 'white' : '' }}
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                      >
+                        Order
+                      </Link>
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  {user?.user?.email === 'admin@gmail.com' ? (
+                    <div className="flow-root">
+                      <Link
+                        to={'/dashboard'}
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                        style={{ color: mode === 'dark' ? 'white' : '' }}
+                      >
+                        admin
+                      </Link>
+                    </div>
+                  ) : null}
 
-                  <div className="flow-root">
-                    <Link
-                      to={'/dashboard'}
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
-                    >
-                      admin
-                    </Link>
-                  </div>
-
-                  <div className="flow-root">
-                    <a
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
-                      style={{ color: mode === 'dark' ? 'white' : '' }}
-                    >
-                      Logout
-                    </a>
-                  </div>
+                  {user ? (
+                    <div className="flow-root">
+                      <a
+                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                        style={{ color: mode === 'dark' ? 'white' : '' }}
+                        onClick={logout}
+                      >
+                        Logout
+                      </a>
+                    </div>
+                  ) : (
+                    ''
+                  )}
                   <div className="flow-root">
                     <Link
                       to={'/'}
@@ -199,27 +216,39 @@ export default function NavBar() {
                   >
                     All Products
                   </Link>
-                  <Link
-                    to={'/order'}
-                    className="text-sm font-medium text-gray-700 "
-                    style={{ color: mode === 'dark' ? 'white' : '' }}
-                  >
-                    Order
-                  </Link>
-                  <Link
-                    to={'/dashboard'}
-                    className="text-sm font-medium text-gray-700 "
-                    style={{ color: mode === 'dark' ? 'white' : '' }}
-                  >
-                    Admin
-                  </Link>
 
-                  <a
-                    className="text-sm font-medium text-gray-700 cursor-pointer  "
-                    style={{ color: mode === 'dark' ? 'white' : '' }}
-                  >
-                    Logout
-                  </a>
+                  {user ? (
+                    <Link
+                      to={'/order'}
+                      className="text-sm font-medium text-gray-700 "
+                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                    >
+                      Order
+                    </Link>
+                  ) : (
+                    ''
+                  )}
+                  {user?.user?.email === 'admin@gmail.com' ? (
+                    <Link
+                      to={'/dashboard'}
+                      className="text-sm font-medium text-gray-700 "
+                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                    >
+                      Admin
+                    </Link>
+                  ) : null}
+
+                  {user ? (
+                    <a
+                      className="text-sm font-medium text-gray-700 cursor-pointer  "
+                      style={{ color: mode === 'dark' ? 'white' : '' }}
+                      onClick={logout}
+                    >
+                      Logout
+                    </a>
+                  ) : (
+                    ''
+                  )}
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">
@@ -241,7 +270,7 @@ export default function NavBar() {
                   <a href="#" className="flex items-center text-gray-700 ">
                     <img
                       className="inline-block w-10 h-10 rounded-full"
-                      src="https://overreacted.io/static/profile-pic-c715447ce38098828758e525a1128b87.jpg"
+                      src="https://marketplace.canva.com/EAFXS8-cvyQ/1/0/1600w/canva-brown-and-light-brown%2C-circle-framed-instagram-profile-picture-2PE9qJLmPac.jpg"
                       alt="Dan_Abromov"
                     />
                   </a>
