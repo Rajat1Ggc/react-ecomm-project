@@ -5,13 +5,13 @@ import { useContext, useState } from 'react';
 import Loader from '../../components/loader/Loader';
 import { Timestamp, addDoc, collection } from 'firebase/firestore';
 import { toast } from 'react-toastify';
-import myContext from '../../context/data/myContext';
+import MyContext from '../../context/data/MyContext';
 
 function Login() {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
 
-  const loader = useContext(myContext);
+  const loader = useContext(MyContext);
   const { loading, setLoading } = loader;
   const navigate = useNavigate();
 

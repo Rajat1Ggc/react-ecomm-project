@@ -3,13 +3,13 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
 import { BsFillCloudSunFill } from 'react-icons/bs';
 import { FiSun } from 'react-icons/fi';
-import myContext from '../../context/data/myContext';
+import MyContext from '../../context/data/MyContext';
 import { RxCross2 } from 'react-icons/rx';
 
 export default function NavBar() {
   const [open, setOpen] = useState(false);
 
-  const context = useContext(myContext);
+  const context = useContext(MyContext);
   const { toggleMode, mode } = context;
 
   const user = JSON.parse(localStorage.getItem('user'));

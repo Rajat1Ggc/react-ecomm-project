@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import myContext from '../../context/data/myContext';
+import MyContext from '../../context/data/MyContext';
 
 function Track() {
-  const context = useContext(myContext);
+  const context = useContext(MyContext);
   const { toggleMode, mode } = context;
   return (
     <div>
