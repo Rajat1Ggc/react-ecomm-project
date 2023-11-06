@@ -1,12 +1,12 @@
 import { useContext, useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import myContext from '../../../context/data/myContext';
+import MyContext from '../../../context/data/MyContext';
 import { MdOutlineProductionQuantityLimits } from 'react-icons/md';
 import { FaUser, FaCartPlus } from 'react-icons/fa';
-import { AiFillShopping, AiFillPlusCircle, AiFillDelete } from 'react-icons/ai';
+import { AiFillShopping } from 'react-icons/ai';
 
 function DashboardTab() {
-  const context = useContext(myContext);
+  const context = useContext(MyContext);
   const { mode } = context;
   let [isOpen, setIsOpen] = useState(false);
 
@@ -17,6 +17,10 @@ function DashboardTab() {
   function openModal() {
     setIsOpen(true);
   }
+
+  const add = () => {
+    window.location.href = '/addproduct';
+  };
   return (
     <>
       <div className="container mx-auto">
@@ -74,7 +78,7 @@ function DashboardTab() {
                     }}
                   >
                     {' '}
-                    <div className="flex gap-2 items-center">
+                    <div className="flex gap-2 items-center" onClick={add}>
                       Add Product <FaCartPlus size={20} />
                     </div>
                   </button>
