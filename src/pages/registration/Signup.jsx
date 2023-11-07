@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import myContext from '../../context/data/myContext';
+import MyContext from '../../context/data/MyContext';
 import { toast } from 'react-toastify';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth, fireDB } from '../../firebase/FirebaseConfig';
@@ -12,7 +12,7 @@ function Signup() {
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
 
-  const loader = useContext(myContext);
+  const loader = useContext(MyContext);
   const { loading, setLoading } = loader;
 
   const signUp = async () => {

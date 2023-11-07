@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { FaUserTie } from 'react-icons/fa';
-import myContext from '../../../context/data/myContext';
+import MyContext from '../../../context/data/MyContext';
 import Layout from '../../../components/layout/Layout';
 import DashboardTab from './DashboardTab';
 
 function Dashboard() {
-  const context = useContext(myContext);
-  const { mode } = context;
+  const context = useContext(MyContext);
+  const { mode, product } = context;
   return (
     <Layout>
       <section className="text-gray-600 body-font mt-10 mb-10">
@@ -30,7 +30,7 @@ function Dashboard() {
                   className="title-font font-medium text-3xl text-black fonts1"
                   style={{ color: mode === 'dark' ? 'white' : '' }}
                 >
-                  10
+                  {product.length}
                 </h2>
                 <p
                   className=" text-purple-500  font-bold"
