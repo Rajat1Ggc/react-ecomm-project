@@ -5,9 +5,12 @@ import {
   Timestamp,
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   orderBy,
   query,
+  setDoc,
 } from 'firebase/firestore';
 import { toast } from 'react-toastify';
 
@@ -71,7 +74,7 @@ function MyState(props) {
 
   const [product, setProduct] = useState([]);
 
-  // ****** get product
+  //  get product
   const getProductData = async () => {
     setLoading(true);
     try {
@@ -99,6 +102,46 @@ function MyState(props) {
     getProductData();
   }, []);
 
+  // edit product
+  const editProduct = (item) => {
+    setProducts(item);
+  };
+
+  // Update product
+  const updateProduct = async () => {
+    setLoading(true);
+    try {
+      await setDoc(doc(fireDB, 'products', products.id), products);
+      toast.success('product update successfully');
+      setTimeout(() => {
+        window.location.href = './dashboard';
+      }, 1000);
+      getProductData();
+      setLoading(false);
+    } catch (error) {
+      console.log('error', error);
+      setLoading(false);
+    }
+  };
+
+  // delete product
+  const deleteProduct = async (item) => {
+    try {
+      await deleteDoc(doc(fireDB, 'products', item.id));
+      getProductData();
+      setTimeout(() => {
+        window.location.href = './dashboard';
+      }, 1000);
+      toast.success('product delete successfully');
+
+      console.log('delete');
+      setLoading(false);
+    } catch (error) {
+      console.log('error', error);
+      setLoading(false);
+    }
+  };
+
   return (
     <MyContext.Provider
       value={{
@@ -110,6 +153,9 @@ function MyState(props) {
         product,
         setProducts,
         addProduct,
+        editProduct,
+        updateProduct,
+        deleteProduct,
       }}
     >
       {props.children}
