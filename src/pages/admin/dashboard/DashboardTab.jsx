@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 function DashboardTab() {
   const context = useContext(MyContext);
   const { mode, product, editProduct, deleteProduct } = context;
-  console.log('product', product);
 
   let [isOpen, setIsOpen] = useState(false);
 
