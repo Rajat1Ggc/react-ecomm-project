@@ -107,6 +107,7 @@ function MyState(props) {
         loading,
         setLoading,
         products,
+        product,
         setProducts,
         addProduct,
       }}
