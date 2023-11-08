@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import MyContext from '../../context/data/MyContext';
 import Layout from '../../components/layout/Layout';
 import Modal from '../../components/modal/ Modal';
@@ -22,6 +22,18 @@ function Cart() {
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cardItems));
   }, [cardItems]);
+
+  const [totelAmount, setTotelAmount] = useState(0);
+
+  useEffect(() => {
+    let temp = 0;
+    cardItems.forEach((cartItem) => {
+      temp = temp + parseInt(cartItem.price);
+    });
+    setTotelAmount(temp);
+  }, [cardItems]);
+  const shipping = parseInt(100);
+  const grandTotel = shipping + totelAmount;
 
   return (
     <Layout>
@@ -114,7 +126,7 @@ function Cart() {
                 className="text-gray-700"
                 style={{ color: mode === 'dark' ? 'white' : '' }}
               >
-                ₹100
+                ₹{totelAmount}
               </p>
             </div>
             <div className="flex justify-between">
@@ -128,7 +140,7 @@ function Cart() {
                 className="text-gray-700"
                 style={{ color: mode === 'dark' ? 'white' : '' }}
               >
-                ₹20
+                ₹{shipping}
               </p>
             </div>
             <hr className="my-4" />
@@ -144,7 +156,7 @@ function Cart() {
                   className="mb-1 text-lg font-bold"
                   style={{ color: mode === 'dark' ? 'white' : '' }}
                 >
-                  ₹200
+                  ₹{grandTotel}
                 </p>
               </div>
             </div>
